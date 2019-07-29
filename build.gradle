@@ -1,4 +1,5 @@
 apply plugin: 'base'
+apply plugin: 'java'
 
 subprojects {
     apply plugin: 'java'
@@ -7,3 +8,34 @@ subprojects {
         mavenCentral()
     }
 }
+
+dependencies {
+    compile project(':project1')
+}
+
+
+
+task(runSimple1, dependsOn: 'classes', type: JavaExec) {
+    main = 'sample.Project2Sample1'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'mrhaki'
+    systemProperty 'simple.message', 'Hello '
+}
+
+task(runSimple2, dependsOn: 'classes', type: JavaExec) {
+    main = 'sample.Project2Sample2'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'mrhaki'
+    systemProperty 'simple.message', 'Hello '
+}
+
+task(runSimple3, dependsOn: 'classes', type: JavaExec) {
+    main = 'sample.Project2Sample3'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'mrhaki'
+    systemProperty 'simple.message', 'Hello '
+}
+ 
+defaultTasks 'runSimple1'
+defaultTasks 'runSimple2'
+defaultTasks 'runSimple3'
